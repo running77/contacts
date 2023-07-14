@@ -4,11 +4,10 @@ class Contacts{
     protected $error = array();
     public $layout;
 
-    public function ListContacts(){        
+    public function ListContacts(){       
         
         
-        if (!$_GET['sort']){$_GET['sort'] = 'asort';}
-        
+        if (!$_GET['sort']){$_GET['sort'] = 'asort';}        
         $this->sortContacts();
 
 
@@ -81,24 +80,33 @@ class Contacts{
 
     function existName($str){
 
-        $name = array_values($_SESSION['contact']['name']);
-        return in_array($str, $name);
+        if (is_array($_SESSION['contact']['name'])){
+            $name = array_values($_SESSION['contact']['name']);
+            return in_array($str, $name);
+        }else{
+            return false;
+        }
 
     }
 
     function existPhone($str){
 
-        $phone = array_values($_SESSION['contact']['phone']);
-        return in_array($str,$phone);
-
+        if (is_array(array_values($_SESSION['contact']['phone']))){
+            $phone = array_values($_SESSION['contact']['phone']);
+            return in_array($str,$phone);
+        }else{
+            return false;           
+        }
     }
 
     function validat(){
         //последоваельная проверка полей
         if (!$this->validName($_GET['name'])){ $this->error[] = 'имя'; }        
         if (!$this->validPhone($_GET['phone'])){ $this->error[] = 'номер телефона'; }
-        if ($this->existName($_GET['name']) && !isset($_GET['id'])){ $this->error[] = 'введите другое имя'; }
-        if ($this->existPhone($_GET['phone']) && !isset($_GET['id'])){ $this->error[] = 'введите другой номер'; }
+        if (!isset($_GET['id']) && $this->existName($_GET['name'])){ $this->error[] = 'введите другое имя'; }
+        if (!isset($_GET['id']) && $this->existPhone($_GET['phone'])){ $this->error[] = 'введите другой номер'; }
+
+        echo 'ID:'.$_GET['id'];
 
         if (count($this->error)>0){
             //если есть ошибка, вывод вместе с ошибкой

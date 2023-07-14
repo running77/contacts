@@ -39,7 +39,7 @@
       <td><input type="text" name="name" value="<?=$_GET['name']?>" required></td>
       <td><input type="text" name="phone" value="<?=$_GET['phone']?>" type="tel" placeholder="+7 (ХХХ) ХХХ-ХХ-ХХ"  pattern="[\+]\d{1}\s[\(]\d{3}[\)]\s\d{3}[\-]\d{2}[\-]\d{2}" minlength="16" maxlength="18"  required ></td>
       <td><input type="hidden" name="act" value="add">
-        <input type="hidden" name="id" value="<?=$_GET['id']?>">
+        <?php if ($_GET['act']=='edit'){ ?><input type="hidden" name="id" value="<?=$_GET['id']?>"><?php } ?>
         <button type="submit" class="btn btn-light">Сохранить</button>
         </td>
     </tr>
