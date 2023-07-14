@@ -97,8 +97,8 @@ class Contacts{
         //последоваельная проверка полей
         if (!$this->validName($_GET['name'])){ $this->error[] = 'имя'; }        
         if (!$this->validPhone($_GET['phone'])){ $this->error[] = 'номер телефона'; }
-        if ($this->existName($_GET['name'])){ $this->error[] = 'введите другое имя'; }
-        if ($this->existPhone($_GET['phone'])){ $this->error[] = 'введите другой номер'; }
+        if ($this->existName($_GET['name']) && !isset($_GET['id'])){ $this->error[] = 'введите другое имя'; }
+        if ($this->existPhone($_GET['phone']) && !isset($_GET['id'])){ $this->error[] = 'введите другой номер'; }
 
         if (count($this->error)>0){
             //если есть ошибка, вывод вместе с ошибкой
