@@ -107,7 +107,6 @@ class Contacts{
         if (!isset($_GET['id']) && $this->existName($_GET['name'])){ $this->error[] = 'введите другое имя'; }
         if (!isset($_GET['id']) && $this->existPhone($_GET['phone'])){ $this->error[] = 'введите другой номер'; }
 
-        echo 'ID:'.$_GET['id'];
 
         if (count($this->error)>0){
             //если есть ошибка, вывод вместе с ошибкой
