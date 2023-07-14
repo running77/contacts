@@ -16,7 +16,7 @@
   <thead>
     <tr>
       <th scope="col">#</th>
-      <th scope="col">Имя <a href="?sort=asort">Воз</a>&nbsp;<a href="?sort=arsort">Убв</a></th>
+      <th scope="col">Имя <?php if ($_SESSION['sort']=='arsort'){ ?><a href="?sort=asort"><i class="bi bi-caret-up"></i></a><?php }else{ ?><a href="?sort=arsort"><i class="bi bi-caret-down"></i></a><?php } ?></th>
       <th scope="col">Номер телефона</th>
       <th scope="col"><i class="bi bi-pencil-square"></i></th>
     </tr>

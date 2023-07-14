@@ -6,7 +6,9 @@ class Contacts{
 
     public function ListContacts(){        
         
+        
         if (!$_GET['sort']){$_GET['sort'] = 'asort';}
+        
         $this->sortContacts();
 
 
@@ -129,10 +131,12 @@ class Contacts{
 
             case'asort':
                 asort($name);
+                $_SESSION['sort'] = 'asort';
             break;
 
             case'arsort':
                 arsort($name);
+                $_SESSION['sort'] = 'arsort';
             break;
             }
 
