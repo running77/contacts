@@ -9,6 +9,7 @@ class Contacts{
         if (!$_GET['sort']){$_GET['sort'] = 'asort';}
         $this->sortContacts();
 
+
         // рисуем страницу
         $this->render(); 
         
@@ -29,7 +30,7 @@ class Contacts{
        $_SESSION['contact']['phone'][] = $_GET['phone'];
        }
        
-       header('Location:http://'.$_SERVER['SERVER_NAME']);
+       header('Location:/');
        }
 
     }
@@ -58,7 +59,7 @@ class Contacts{
         }
 
         //переадрессация на дефолтную страницу
-        header('Location:http://'.$_SERVER['SERVER_NAME']);  
+        header('Location:/');  
         
     }
 
@@ -78,12 +79,25 @@ class Contacts{
 
     function existName($str){
 
+        $name = array_values($_SESSION['contact']['name']);
+        return in_array($str, $name);
+
+    }
+
+    function existPhone($str){
+
+        $phone = array_values($_SESSION['contact']['phone']);
+        return in_array($str,$phone);
+
     }
 
     function validat(){
         //последоваельная проверка полей
-        if (!$this->validName($_GET['name'])){ $this->error[] = 'имя'; }
+        if (!$this->validName($_GET['name'])){ $this->error[] = 'имя'; }        
         if (!$this->validPhone($_GET['phone'])){ $this->error[] = 'номер телефона'; }
+        if ($this->existName($_GET['name'])){ $this->error[] = 'введите другое имя'; }
+        if ($this->existPhone($_GET['phone'])){ $this->error[] = 'введите другой номер'; }
+
         if (count($this->error)>0){
             //если есть ошибка, вывод вместе с ошибкой
             $this->render($this->error);
@@ -93,11 +107,6 @@ class Contacts{
             return true;
 
         }
-
-    }
-
-    function existPhone($str){
-
 
     }
 
