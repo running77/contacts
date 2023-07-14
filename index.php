@@ -1,5 +1,6 @@
 <?php
 session_start();
+error_reporting(55);
 require "lib/classContacts.php";
 
 $contact = new Contacts();

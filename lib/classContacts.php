@@ -3,6 +3,7 @@ class Contacts{
 
     protected $error = array();
     public $layout;
+    
 
     public function ListContacts(){       
         
@@ -91,7 +92,7 @@ class Contacts{
 
     function existPhone($str){
 
-        if (is_array(array_values($_SESSION['contact']['phone']))){
+        if (is_array($_SESSION['contact']['phone'])){
             $phone = array_values($_SESSION['contact']['phone']);
             return in_array($str,$phone);
         }else{
