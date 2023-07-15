@@ -51,9 +51,8 @@ class Contacts{
         unset($_SESSION['contact']['name'][$id]);
         unset($_SESSION['contact']['phone'][$id]);
        
-        //пересчитываем индексы
-        $_SESSION['contact']['name'] = array_values($_SESSION['contact']['name']);
-        $_SESSION['contact']['phone'] = array_values($_SESSION['contact']['phone']);
+        //переиндексация массива        
+        $this->reindexSession();
 
         if (empty($_SESSION['contact']['name'][0]))
         {
@@ -63,6 +62,14 @@ class Contacts{
         //переадрессация на дефолтную страницу
         header('Location:/');  
         
+    }
+
+    function reindexSession(){
+
+        //пересчитываем индексы
+        $_SESSION['contact']['name'] = array_values($_SESSION['contact']['name']);
+        $_SESSION['contact']['phone'] = array_values($_SESSION['contact']['phone']);
+
     }
 
     function validName($str){
@@ -156,9 +163,7 @@ class Contacts{
             $_SESSION['contact']['name'] = $name;
             $_SESSION['contact']['phone'] = $phone;
 
-            $_SESSION['contact']['name'] = array_values($_SESSION['contact']['name']);
-            $_SESSION['contact']['phone'] = array_values($_SESSION['contact']['phone']);
-
+            $this->reindexSession();
         
     }
 
